@@ -5,25 +5,25 @@ from prng import PRNG, ValueMismatchException
 class PHPmtrand(PRNG):
     _ValueVector = namedtuple('ValueVector', ['current_value', 'next_value', 'period_value'])
 
-    _STATE_SIZE = 624							# n (MT19937 constant)
-    _PERIOD = 397								# m (MT19937 constant)
+    _STATE_SIZE = 624                           # n (MT19937 constant)
+    _PERIOD = 397                               # m (MT19937 constant)
 
-    _INITIALIZATION_MULTIPLIER = 0x6C078965		# f (MT19937 constant)
-    _WORD_SHIFT = 30							# w - 2 (MT19937 constant)
+    _INITIALIZATION_MULTIPLIER = 0x6C078965     # f (MT19937 constant)
+    _WORD_SHIFT = 30                            # w - 2 (MT19937 constant)
 
-    _XOR_MASK = 0x9908B0DF						# a (MT19937 constant)
+    _XOR_MASK = 0x9908B0DF                      # a (MT19937 constant)
 
-    _BITSHIFT_1 = 11							# u (MT19937 constant)
-    _BITSHIFT_2 = 7								# s (MT19937 constant)
-    _BITSHIFT_3 = 15							# t (MT19937 constant)
-    _BITSHIFT_4 = 18							# l (MT19937 constant)
+    _BITSHIFT_1 = 11                            # u (MT19937 constant)
+    _BITSHIFT_2 = 7                             # s (MT19937 constant)
+    _BITSHIFT_3 = 15                            # t (MT19937 constant)
+    _BITSHIFT_4 = 18                            # l (MT19937 constant)
 
-    _BITMASK_1 = 0x9D2C5680						# b (MT19937 constant)
-    _BITMASK_2 = 0xEFC60000						# c (MT19937 constant)
+    _BITMASK_1 = 0x9D2C5680                     # b (MT19937 constant)
+    _BITMASK_2 = 0xEFC60000                     # c (MT19937 constant)
 
-    _MASK = 0xFFFFFFFF							# Bit 0 to 31
-    _HIGH_MASK = 0x80000000						# Bit 31
-    _LOW_MASK = 0x7FFFFFFF						# Bit 0 to 30
+    _MASK = 0xFFFFFFFF                          # Bit 0 to 31
+    _HIGH_MASK = 0x80000000                     # Bit 31
+    _LOW_MASK = 0x7FFFFFFF                      # Bit 0 to 30
 
     def __init__(self):
         self._seeded = False
