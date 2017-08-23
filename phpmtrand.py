@@ -76,16 +76,20 @@ class PHPmtrand(PRNG):
                                   for period_value in vals[period_index]]
 
             vals[current_index].clear()
+            vals[next_index].clear()
+            vals[period_index].clear()
             for value_vector in value_combinations:
                 result = self._update(value_vector)
 
-                # The correct original value was determined.
+                # A possible original value was determined.
                 if self._tamper(result) == verification[current_index]:
                     vals[current_index].add(result)
+                    vals[next_index].add(value_vector.next_value)
+                    vals[period_index].add(value_vector.period_value)
                     self._state[current_index] = value_vector.current_value
 
-            # The correct original value was not determined.
-            if not self._state[current_index]:
+            # No possible original value was determined.
+            if not vals[current_index]:
                 raise ValueMismatchException()
 
     # Tampers a value from the internal state.
