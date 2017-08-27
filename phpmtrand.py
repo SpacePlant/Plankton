@@ -62,6 +62,7 @@ class PHPmtrand(PRNG):
 
         self._index = 0
 
+    # Recovers the internal state from output.
     def _recover_state(self, vals, verification):
         self._state = [0 for _ in range(PHPmtrand._STATE_SIZE)]
 
