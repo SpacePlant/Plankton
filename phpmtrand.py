@@ -21,9 +21,8 @@ class PHPmtrand(PRNG):
     _BITMASK_1 = 0x9D2C5680                     # b (MT19937 constant)
     _BITMASK_2 = 0xEFC60000                     # c (MT19937 constant)
 
-    _MASK = 0xFFFFFFFF                          # Bit 0 to 31
-    _HIGH_MASK = 0x80000000                     # Bit 31
-    _LOW_MASK = 0x7FFFFFFF                      # Bit 0 to 30
+    _MASK_HIGH = 0x80000000                     # Bit 31
+    _MASK_LOW = 0x7FFFFFFF                      # Bit 0 to 30
 
     def __init__(self):
         self._seeded = False
@@ -42,7 +41,7 @@ class PHPmtrand(PRNG):
 
     # Calculates new value in current state based on values in previous state.
     def _update(self, value_vector):
-        val = (value_vector.current_value & PHPmtrand._HIGH_MASK) | (value_vector.next_value & PHPmtrand._LOW_MASK)
+        val = (value_vector.current_value & PHPmtrand._MASK_HIGH) | (value_vector.next_value & PHPmtrand._MASK_LOW)
         val >>= 1
         if value_vector.current_value % 2:  # PHP implementation differs from MT19937
             val ^= PHPmtrand._XOR_MASK
@@ -117,10 +116,10 @@ class PHPmtrand(PRNG):
         return results
 
     def seed(self, val):
-        self._state[0] = val & PHPmtrand._MASK
+        self._state[0] = val & PRNG._MASK_32BIT
         for i in range(1, PHPmtrand._STATE_SIZE):
             self._state[i] = (PHPmtrand._INITIALIZATION_MULTIPLIER * (
-                self._state[i - 1] ^ (self._state[i - 1] >> PHPmtrand._WORD_SHIFT)) + i) & PHPmtrand._MASK
+                self._state[i - 1] ^ (self._state[i - 1] >> PHPmtrand._WORD_SHIFT)) + i) & PRNG._MASK_32BIT
 
         self._seeded = True
 

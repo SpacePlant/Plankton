@@ -14,7 +14,7 @@ class PHPmtrand7(PHPmtrand):
                              bf_compl=3)
 
     def _update(self, value_vector):
-        val = (value_vector.current_value & PHPmtrand._HIGH_MASK) | (value_vector.next_value & PHPmtrand._LOW_MASK)
+        val = (value_vector.current_value & PHPmtrand._MASK_HIGH) | (value_vector.next_value & PHPmtrand._MASK_LOW)
         val >>= 1
         if value_vector.next_value % 2:  # Fixed in PHP 7.1
             val ^= PHPmtrand._XOR_MASK

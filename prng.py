@@ -11,6 +11,9 @@ class PRNG:
                                        'req_vals',      # The number of required subsequent values for state recovery
                                        'bf_compl'])     # The complexity of the brute-force for state recovery (bits)
 
+    _MASK_32BIT = 0xFFFFFFFF
+    _MASK_64BIT = 0xFFFFFFFFFFFFFFFF
+
     _DEFAULT_SEED = 12345678
 
     # Returns a tuple with the PRNG details.
