@@ -1,10 +1,10 @@
-from prng import PRNG
+from mt19937 import MT19937
 from phpmtrand import PHPmtrand
 
 
 class PHPmtrand7(PHPmtrand):
     def get_info(self):
-        return PRNG.PRNGInfo(name='PHP 7.1+ mt_rand()',
+        return self.PRNGInfo(name='PHP 7.1+ mt_rand()',
                              s_name='phpmtrand7',
                              type='Mersenne Twister',
                              seed_entropy=32,
@@ -14,8 +14,4 @@ class PHPmtrand7(PHPmtrand):
                              bf_compl=3)
 
     def _update(self, value_vector):
-        val = (value_vector.current_value & PHPmtrand._MASK_HIGH) | (value_vector.next_value & PHPmtrand._MASK_LOW)
-        val >>= 1
-        if value_vector.next_value % 2:  # Fixed in PHP 7.1
-            val ^= PHPmtrand._XOR_MASK
-        return value_vector.period_value ^ val
+        return MT19937._update(self, value_vector)  # Fixed in PHP 7.1
