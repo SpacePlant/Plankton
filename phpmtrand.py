@@ -82,7 +82,7 @@ class PHPmtrand(PRNG):
                 result = self._update(value_vector)
 
                 # A possible original value was determined.
-                if self._tamper(result) == verification[current_index]:
+                if self._temper(result) == verification[current_index]:
                     vals[current_index].add(result)
                     vals[next_index].add(value_vector.next_value)
                     vals[period_index].add(value_vector.period_value)
@@ -92,16 +92,16 @@ class PHPmtrand(PRNG):
             if not vals[current_index]:
                 raise ValueMismatchException()
 
-    # Tampers a value from the internal state.
-    def _tamper(self, val):
+    # Tempers a value from the internal state.
+    def _temper(self, val):
         val ^= val >> PHPmtrand._BITSHIFT_1
         val ^= (val << PHPmtrand._BITSHIFT_2) & PHPmtrand._BITMASK_1
         val ^= (val << PHPmtrand._BITSHIFT_3) & PHPmtrand._BITMASK_2
         val ^= val >> PHPmtrand._BITSHIFT_4
         return val >> 1  # Destroy LSB
 
-    # Reverses the tamper operation.
-    def _reverse_tamper(self, val):
+    # Reverses the temper operation.
+    def _reverse_temper(self, val):
         results = set()
         for valx in [val << 1, (val << 1) + 1]:  # LSB can be 0 or 1
             valx ^= valx >> PHPmtrand._BITSHIFT_4
@@ -130,7 +130,7 @@ class PHPmtrand(PRNG):
         if self._index >= PHPmtrand._STATE_SIZE:
             self._reload()
 
-        result = self._tamper(self._state[self._index])
+        result = self._temper(self._state[self._index])
 
         self._index += 1
         return result
@@ -140,7 +140,7 @@ class PHPmtrand(PRNG):
 
         reversed_state = []
         for val in vals[:PHPmtrand._STATE_SIZE]:
-            reversed_state.append(self._reverse_tamper(val))
+            reversed_state.append(self._reverse_temper(val))
 
         self._recover_state(reversed_state, vals[PHPmtrand._STATE_SIZE:])
 
