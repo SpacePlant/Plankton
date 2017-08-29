@@ -18,9 +18,11 @@ class MT19937(PRNG):
     _BITSHIFT_3 = 15                            # t (MT19937 constant)
     _BITSHIFT_4 = 18                            # l (MT19937 constant)
 
-    _BITMASK_1 = 0x9D2C5680                     # b (MT19937 constant)
-    _BITMASK_2 = 0xEFC60000                     # c (MT19937 constant)
+    _BITMASK_1 = 0xFFFFFFFF                     # d (MT19937 constant)
+    _BITMASK_2 = 0x9D2C5680                     # b (MT19937 constant)
+    _BITMASK_3 = 0xEFC60000                     # c (MT19937 constant)
 
+    _MASK = PRNG._MASK_32BIT
     _MASK_HIGH = 0x80000000                     # Bit 31
     _MASK_LOW = 0x7FFFFFFF                      # Bit 0 to 30
 
@@ -63,29 +65,29 @@ class MT19937(PRNG):
 
     # Tempers a value from the internal state.
     def _temper(self, val):
-        val ^= val >> self._BITSHIFT_1
-        val ^= (val << self._BITSHIFT_2) & self._BITMASK_1
-        val ^= (val << self._BITSHIFT_3) & self._BITMASK_2
+        val ^= val >> self._BITSHIFT_1 & self._BITMASK_1
+        val ^= (val << self._BITSHIFT_2) & self._BITMASK_2
+        val ^= (val << self._BITSHIFT_3) & self._BITMASK_3
         val ^= val >> self._BITSHIFT_4
         return val
 
     # Reverses the temper operation.
     def _reverse_temper(self, val):
         val ^= val >> self._BITSHIFT_4
-        val ^= (val << self._BITSHIFT_3) & self._BITMASK_2
-        val ^= (val << self._BITSHIFT_2) & self._BITMASK_1 & (0b1111111 << 7)
-        val ^= (val << self._BITSHIFT_2) & self._BITMASK_1 & (0b1111111 << 14)
-        val ^= (val << self._BITSHIFT_2) & self._BITMASK_1 & (0b1111111 << 21)
-        val ^= (val << self._BITSHIFT_2) & self._BITMASK_1 & (0b1111 << 28)
-        val ^= (val >> self._BITSHIFT_1) & (0b11111111111 << 10)
-        val ^= (val >> self._BITSHIFT_1) & 0b1111111111
+        val ^= (val << self._BITSHIFT_3) & self._BITMASK_3
+        val ^= (val << self._BITSHIFT_2) & self._BITMASK_2 & (0b1111111 << 7)
+        val ^= (val << self._BITSHIFT_2) & self._BITMASK_2 & (0b1111111 << 14)
+        val ^= (val << self._BITSHIFT_2) & self._BITMASK_2 & (0b1111111 << 21)
+        val ^= (val << self._BITSHIFT_2) & self._BITMASK_2 & (0b1111 << 28)
+        val ^= (val >> self._BITSHIFT_1) & self._BITMASK_1 & (0b11111111111 << 10)
+        val ^= (val >> self._BITSHIFT_1) & self._BITMASK_1 & 0b1111111111
         return val
 
     def seed(self, val):
-        self._state[0] = val & self._MASK_32BIT
+        self._state[0] = val & self._MASK
         for i in range(1, self._STATE_SIZE):
             self._state[i] = (self._INITIALIZATION_MULTIPLIER * (
-                self._state[i - 1] ^ (self._state[i - 1] >> self._WORD_SHIFT)) + i) & self._MASK_32BIT
+                self._state[i - 1] ^ (self._state[i - 1] >> self._WORD_SHIFT)) + i) & self._MASK
 
         self._seeded = True
 
@@ -104,7 +106,7 @@ class MT19937(PRNG):
     def recover(self, vals):
         self._verify_input(vals)
 
-        self._state = [self._reverse_temper(val) for val in vals]
+        self._state = [self._reverse_temper(val) for val in vals[:self._STATE_SIZE]]
 
         self._reload()
         self._seeded = True

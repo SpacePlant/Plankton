@@ -70,7 +70,7 @@ class PHPmtrand(MT19937):
         for val in vals[:self._STATE_SIZE]:
             reversed_state.append(self._reverse_temper(val))
 
-        self._recover_state(reversed_state, vals[self._STATE_SIZE:])
+        self._recover_state(reversed_state, vals[self._STATE_SIZE:self._STATE_SIZE * 2])
 
         self._reload()
         self._reload()
