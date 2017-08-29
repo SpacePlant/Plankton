@@ -89,6 +89,7 @@ class MT19937(PRNG):
             self._state[i] = (self._INITIALIZATION_MULTIPLIER * (
                 self._state[i - 1] ^ (self._state[i - 1] >> self._WORD_SHIFT)) + i) & self._MASK
 
+        self._index = self._STATE_SIZE
         self._seeded = True
 
     def next(self):
