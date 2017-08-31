@@ -1,5 +1,5 @@
 from collections import namedtuple
-from prng import PRNG
+from ..prng import PRNG
 
 
 class MT19937(PRNG):

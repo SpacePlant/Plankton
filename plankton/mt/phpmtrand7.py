@@ -1,5 +1,5 @@
-from mt19937 import MT19937
-from phpmtrand import PHPmtrand
+from .mt19937 import MT19937
+from .phpmtrand import PHPmtrand
 
 
 class PHPmtrand7(PHPmtrand):

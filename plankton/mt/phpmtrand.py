@@ -1,5 +1,5 @@
-from prng import ValueMismatchException
-from mt19937 import MT19937
+from ..prng import ValueMismatchException
+from .mt19937 import MT19937
 
 
 class PHPmtrand(MT19937):

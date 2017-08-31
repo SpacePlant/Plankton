@@ -1,5 +1,5 @@
-from prng import PRNG
-from mt19937 import MT19937
+from ..prng import PRNG
+from .mt19937 import MT19937
 
 
 class MT19937_64(MT19937):
