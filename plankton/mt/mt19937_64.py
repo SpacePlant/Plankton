@@ -22,6 +22,8 @@ class MT19937_64(MT19937):
     _MASK_HIGH = 0xFFFFFFFF80000000                     # Bit 31 to 63
     _MASK_LOW = 0x7FFFFFFF                              # Bit 0 to 30
 
+    _MODULUS = 2**64
+
     def get_info(self):
         return self.PRNGInfo(name='MT19937-64',
                              s_name='mt19937_64',
