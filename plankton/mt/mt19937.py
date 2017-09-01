@@ -22,7 +22,6 @@ class MT19937(PRNG):
     _BITMASK_2 = 0x9D2C5680                     # b (MT19937 constant)
     _BITMASK_3 = 0xEFC60000                     # c (MT19937 constant)
 
-    _MASK = PRNG._MASK_32BIT
     _MASK_HIGH = 0x80000000                     # Bit 31
     _MASK_LOW = 0x7FFFFFFF                      # Bit 0 to 30
 
@@ -84,10 +83,11 @@ class MT19937(PRNG):
         return val
 
     def seed(self, val):
-        self._state[0] = val & self._MASK
+        modulus = 2 ** self.get_info().seed_entropy
+        self._state[0] = val % modulus
         for i in range(1, self._STATE_SIZE):
             self._state[i] = (self._INITIALIZATION_MULTIPLIER * (
-                self._state[i - 1] ^ (self._state[i - 1] >> self._WORD_SHIFT)) + i) & self._MASK
+                self._state[i - 1] ^ (self._state[i - 1] >> self._WORD_SHIFT)) + i) % modulus
 
         self._index = self._STATE_SIZE
         self._seeded = True

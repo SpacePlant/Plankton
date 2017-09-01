@@ -1,4 +1,3 @@
-from ..prng import PRNG
 from .mt19937 import MT19937
 
 
@@ -20,7 +19,6 @@ class MT19937_64(MT19937):
     _BITMASK_2 = 0x71D67FFFEDA60000                     # b (MT19937-64 constant)
     _BITMASK_3 = 0xFFF7EEE000000000                     # c (MT19937-64 constant)
 
-    _MASK = PRNG._MASK_64BIT
     _MASK_HIGH = 0xFFFFFFFF80000000                     # Bit 31 to 63
     _MASK_LOW = 0x7FFFFFFF                              # Bit 0 to 30
 
