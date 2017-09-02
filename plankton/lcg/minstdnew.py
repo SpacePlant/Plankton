@@ -12,7 +12,7 @@ class MINSTDNew(LCG):
                              req_vals=1,
                              bf_compl=0)
 
-    def get_constants(self):
+    def _get_constants(self):
         return self.LCGConstants(a=48271,
                                  c=0,
                                  m=2**31 - 1)

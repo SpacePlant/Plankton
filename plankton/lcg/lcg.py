@@ -11,14 +11,14 @@ class LCG(PRNG):
         self._state = self._DEFAULT_SEED
 
     # Returns a tuple with the LCG constants
-    def get_constants(self):
+    def _get_constants(self):
         pass
 
     def seed(self, val):
-        self._state = val % self.get_constants().m
+        self._state = val % self._get_constants().m
 
     def next(self):
-        constants = self.get_constants()
+        constants = self._get_constants()
         self._state = (constants.a * self._state + constants.c) % constants.m
         return self._state
 

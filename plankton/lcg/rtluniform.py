@@ -12,7 +12,7 @@ class RtlUniform(LCG):
                              req_vals=1,
                              bf_compl=0)
 
-    def get_constants(self):
+    def _get_constants(self):
         return self.LCGConstants(a=0x7FFFFFED,
                                  c=0x7FFFFFC3,
                                  m=2**31 - 1)
