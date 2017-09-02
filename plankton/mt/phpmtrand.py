@@ -9,7 +9,7 @@ class PHPmtrand(MT19937):
                              type='Mersenne Twister',
                              seed_entropy=32,
                              out_min=0,
-                             out_max=(2 ** 31 - 1),
+                             out_max=(2**31 - 1),
                              req_vals=1248,
                              bf_compl=3)
 

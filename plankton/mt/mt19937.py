@@ -38,7 +38,7 @@ class MT19937(PRNG):
                              type='Mersenne Twister',
                              seed_entropy=32,
                              out_min=0,
-                             out_max=(2 ** 32 - 1),
+                             out_max=(2**32 - 1),
                              req_vals=624,
                              bf_compl=0)
 
