@@ -24,5 +24,5 @@ class LCG(PRNG):
 
     def recover(self, vals):
         self._verify_input(vals)
-        self.seed(vals[0])
+        self._state = vals[0]
         self._verify_output(vals[1:])
