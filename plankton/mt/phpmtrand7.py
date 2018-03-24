@@ -8,8 +8,7 @@ class PHPmtrand7(MT19937):
                              s_name='phpmtrand7',
                              type='Mersenne Twister',
                              seed_entropy=32,
-                             out_min=0,
-                             out_max=(2**31 - 1),
+                             out_range=2**31,
                              req_vals=1248,
                              bf_compl=3)
 

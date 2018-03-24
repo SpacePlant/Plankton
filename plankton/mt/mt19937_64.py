@@ -29,8 +29,7 @@ class MT19937_64(MT19937):
                              s_name='mt19937_64',
                              type='Mersenne Twister',
                              seed_entropy=64,
-                             out_min=0,
-                             out_max=(2**64 - 1),
+                             out_range=2**64,
                              req_vals=312,
                              bf_compl=0)
 

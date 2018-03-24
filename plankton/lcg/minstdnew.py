@@ -7,8 +7,7 @@ class MINSTDNew(LCG):
                              s_name='minstdnew',
                              type='Linear Congruential Generator',
                              seed_entropy=31,
-                             out_min=0,
-                             out_max=(2**31 - 2),
+                             out_range=2**31 - 1,
                              req_vals=1,
                              bf_compl=0)
 
