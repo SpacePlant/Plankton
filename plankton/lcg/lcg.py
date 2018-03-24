@@ -8,7 +8,7 @@ class LCG(PRNG):
                                                'm'])  # Modulus
 
     def __init__(self):
-        self._state = self._DEFAULT_SEED
+        self._state = self.seed(self._DEFAULT_SEED)
 
     # Returns a tuple with the LCG constants
     def _get_constants(self):
