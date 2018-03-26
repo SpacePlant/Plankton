@@ -27,11 +27,6 @@ class MT19937(PRNG):
 
     _MODULUS = 2**32
 
-    def __init__(self):
-        self._seeded = False
-        self._state = [0 for _ in range(self._STATE_SIZE)]
-        self._index = self._STATE_SIZE
-
     def get_info(self):
         return self.PRNGInfo(name='MT19937',
                              s_name='mt19937',
@@ -40,6 +35,11 @@ class MT19937(PRNG):
                              out_range=2**32,
                              req_vals=624,
                              bf_compl=0)
+
+    def __init__(self):
+        self._seeded = False
+        self._state = [0 for _ in range(self._STATE_SIZE)]
+        self._index = self._STATE_SIZE
 
     # Calculates new value in current state based on values in previous state.
     def _update(self, value_vector):
