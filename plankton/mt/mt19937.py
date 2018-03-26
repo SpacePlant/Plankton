@@ -65,7 +65,7 @@ class MT19937(PRNG):
 
     # Tempers a value from the internal state.
     def _temper(self, val):
-        val ^= val >> self._BITSHIFT_1 & self._BITMASK_1
+        val ^= (val >> self._BITSHIFT_1) & self._BITMASK_1
         val ^= (val << self._BITSHIFT_2) & self._BITMASK_2
         val ^= (val << self._BITSHIFT_3) & self._BITMASK_3
         val ^= val >> self._BITSHIFT_4
