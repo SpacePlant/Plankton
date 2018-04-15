@@ -43,7 +43,7 @@ class PRNG:
     def _verify_output(self, vals):
         for val in vals:
             if val != self.next():
-                raise ValueMismatchException
+                raise ValueMismatchException()
 
 
 class NotEnoughValuesException(Exception):
