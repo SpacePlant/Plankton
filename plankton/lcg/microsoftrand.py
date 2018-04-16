@@ -6,7 +6,7 @@ class MicrosoftRand(LCGTruncated):
         return self.PRNGInfo(name='Microsoft rand()',
                              s_name='microsoftrand',
                              type='Linear Congruential Generator',
-                             seed_entropy=31,
+                             seed_size=31,
                              out_range=2**15,
                              req_vals=3,
                              bf_compl=16)

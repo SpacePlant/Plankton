@@ -28,7 +28,7 @@ class MT19937_64(MT19937):
         return self.PRNGInfo(name='MT19937-64',
                              s_name='mt19937_64',
                              type='Mersenne Twister',
-                             seed_entropy=64,
+                             seed_size=64,
                              out_range=2**64,
                              req_vals=312,
                              bf_compl=0)

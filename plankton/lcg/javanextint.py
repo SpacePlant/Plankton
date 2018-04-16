@@ -6,7 +6,7 @@ class JavaNextInt(LCGTruncated):
         return self.PRNGInfo(name='Java Random nextInt()',
                              s_name='javanextint',
                              type='Linear Congruential Generator',
-                             seed_entropy=48,
+                             seed_size=48,
                              out_range=2**32,
                              req_vals=2,
                              bf_compl=16)

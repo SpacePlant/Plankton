@@ -13,7 +13,7 @@ class Xorshift128Plus(PRNG):
         return self.PRNGInfo(name='xorshift128+',
                              s_name='xorshift128+',
                              type='Xorshift',
-                             seed_entropy=128,
+                             seed_size=128,
                              out_range=2**64,
                              req_vals=3,
                              bf_compl=0)

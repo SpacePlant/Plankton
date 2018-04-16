@@ -7,7 +7,7 @@ class PHPmtrand7(MT19937):
         return self.PRNGInfo(name='PHP 7.1+ mt_rand()',
                              s_name='phpmtrand7',
                              type='Mersenne Twister',
-                             seed_entropy=32,
+                             seed_size=32,
                              out_range=2**31,
                              req_vals=1248,
                              bf_compl=3)
